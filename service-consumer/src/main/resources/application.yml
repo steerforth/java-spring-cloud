@@ -16,3 +16,9 @@ eureka:
     service-url:
       ###配置eureka集群
       defaultZone: http://${eureka.instance.ip-address}:8000/eureka/,http://${eureka.instance.ip-address}:8001/eureka/
+
+
+feign:
+  hystrix:
+    #默认关闭
+    enabled: true
