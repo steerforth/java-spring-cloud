@@ -1,0 +1,58 @@
+#CAP角度，EUREKA为AP系统，高可用为主
+spring:
+  application:
+    name: steer-eureka
+server:
+  port: 8000
+# 不能使用，会让注册失败
+#  servlet:
+#    context-path: /eureka
+
+
+#########单注册中心###########
+#eureka:
+#  server:
+#    #关闭自我保护模式
+#    enable-self-preservation: false
+#    #清理间隔
+#    eviction-interval-timer-in-ms: 60000
+#  instance:
+#    prefer-ip-address: true
+#    ip-address: 127.0.0.1
+#  #    instance-id: ${spring.cloud.client.ipAddress}:${spring.application.name}:${server.port}:@project.version@
+#  #    hostname: eureka-1
+#  client:
+#    #表示是否将自己注册到Eureka Server，默认为true
+#    register-with-eureka: false
+#    #是否从Eureka Server获取注册信息，默认为true
+#    fetch-registry: false
+#    service-url:
+#      defaultZone:  http://${eureka.instance.ip-address}:${server.port}/eureka/
+
+
+
+#########注册集群配置############
+eureka:
+  server:
+    #关闭自我保护模式
+    enable-self-preservation: false
+    #清理间隔
+    eviction-interval-timer-in-ms: 60000
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+#    instance-id: ${spring.cloud.client.ipAddress}:${spring.application.name}:${server.port}:@project.version@
+  #    hostname: eureka-1
+  client:
+    #####地区#####
+    prefer-same-zone-eureka: true
+    region: hangzhou
+    availability-zones:
+      hangzhou: zone-1,zone-2
+    #多个地址可使用,分隔
+    service-url:
+#      defaultZone:  http://127.0.0.1:8000/eureka/,http://127.0.0.1:8001/eureka/
+      #ip指向其他的注册中心
+      zone-1: http://127.0.0.1:8001/eureka/
+      zone-2: http://127.0.0.1:8002/eureka/
+

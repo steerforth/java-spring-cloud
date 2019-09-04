@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: steer-service-provider
+server:
+  port: 9000
+#  servlet:
+#    context-path: /service
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+  #    instance-id: ${spring.cloud.client.ipAddress}:${spring.application.name}:${server.port}:@project.version@
+  #    hostname: eureka-1
+  client:
+    service-url:
+      #配置eureka集群
+      defaultZone: http://${eureka.instance.ip-address}:8000/eureka/,http://${eureka.instance.ip-address}:8001/eureka/
